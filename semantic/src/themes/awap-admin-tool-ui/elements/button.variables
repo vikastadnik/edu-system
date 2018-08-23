@@ -1,0 +1,8 @@
+@textColor: @color-white;
+@hoverColor: @color-white;
+@background: @color-gray;
+@hoverBackgroundColor: @color-gray-hover;
+@primaryColor: @color-light-green;
+@secondaryColor: @color-gray;
+@positiveColor: @color-light-green;
+@negativeColor: @color-light-orange;

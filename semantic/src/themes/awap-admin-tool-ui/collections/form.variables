@@ -1,0 +1,5 @@
+@labelColor: @font-color;
+@labelDistance: 2px;
+
+@inputColor: @textColor;
+@inputLineHeight: @lineHeight;

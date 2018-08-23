@@ -1,0 +1,22 @@
+@import (reference) "../../index.app.less";
+
+[data-component="app-header"] {
+  @width-padding: 1.14285714em;
+  @height-padding: .78571429em;
+
+  margin: 0em !important;
+  box-shadow: none !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+
+  &.ui.menu > .item:not(.header):not(.dropdown),
+  &.ui.menu .ui.dropdown .menu > .item {
+    padding: 0em !important;
+  }
+
+  &.ui.menu > .item:not(.header):not(.dropdown) a,
+  &.ui.menu .ui.dropdown .menu > .item a {
+    display: block;
+  }
+}
