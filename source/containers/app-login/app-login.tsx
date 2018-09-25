@@ -32,16 +32,15 @@ export class AppLogin extends React.Component<IProps, IState> {
   }
 
   @autobind
-  public onLogin(): void {
-    this.setState({loading: true});
-    BaseAPI.logIn({login: this.state.login, password: this.state.password})
-      .then((token: IAuthToken): void => {
-        this.setState({loading: false});
-        this.props.dispatch(Actions.Auth.setAuthToken(token));
-      })
-      .catch((error: AxiosError): void => {
-        this.setState({loading: false, error});
-      });
+  public async onLogin(): Promise<void> {
+    try {
+      this.setState({loading: true});
+      const token: IAuthToken = await BaseAPI.logIn({login: this.state.login, password: this.state.password});
+      this.setState({loading: false});
+      this.props.dispatch(Actions.Auth.setAuthToken(token));
+    } catch (error) {
+      this.setState({loading: false, error});
+    }
   }
 
   public getLogInForm(): JSX.Element {

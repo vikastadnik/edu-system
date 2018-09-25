@@ -9,7 +9,5 @@ export interface IToken {
 }
 export interface IAppRoute extends RouteConfig {
   readonly caption: string;
-  readonly  path: string;
-  readonly  exact: boolean;
   readonly routes?: IAppRoute[];
 }
