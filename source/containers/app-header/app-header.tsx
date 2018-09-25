@@ -4,10 +4,11 @@ import { NavLink } from 'react-router-dom';
 import { IAppHeaderConnectProps } from './app-header-container';
 import { BaseAPI } from '../../api';
 import { IAppRoute } from '../../interfaces';
-import { APP_ROUTES, COMMON_VIEW_TEXT, LOG_IN_TEXT } from '../../constants';
+import { ADMIN_APP_ROUTES, COMMON_VIEW_TEXT, LOG_IN_TEXT, TEACHER_APP_ROUTES } from '../../constants';
 import * as Actions from '../../actions';
 import './app-header.less';
 import { autobind } from 'core-decorators';
+import { USER_ROLES } from '../../enums';
 
 /**
  * App header contains navigation links based on APPLICATION_ROUTES constant
@@ -28,9 +29,24 @@ export class AppHeader extends React.Component<IAppHeaderConnectProps> {
   }
 
   /** Generate header navigation links based on APPLICATION_ROUTES constant */
-  public getNavLinks(root: IAppRoute[] = APP_ROUTES, nested: boolean = false): JSX.Element[] {
-    if (!this.props.auth.csrf) { return null; }
+  public getNavLinks(root?: IAppRoute[], nested: boolean = false): JSX.Element[] {
+    if (!this.props.auth.csrf) {
+      return null;
+    }
 
+    if (!root) {
+      switch (this.props.auth.role) {
+        case USER_ROLES.ADMIN:
+          root = ADMIN_APP_ROUTES;
+          break;
+        case USER_ROLES.TEACHER:
+          root = TEACHER_APP_ROUTES;
+          break;
+        default:
+          root = [];
+          break;
+      }
+    }
     const links: JSX.Element[] = root.map((route: IAppRoute, index: number): JSX.Element => {
       if (route.routes) {
         return (
@@ -49,23 +65,23 @@ export class AppHeader extends React.Component<IAppHeaderConnectProps> {
         </NavLink>
       );
 
-      const link: JSX.Element = (nested)
-        ? <Dropdown.Item key={index} content={navLink} />
-        : <Menu.Item key={index} content={navLink} />;
-
-      return link;
+      return (nested)
+        ? <Dropdown.Item key={index} content={navLink}/>
+        : <Menu.Item key={index} content={navLink}/>;
     });
 
     return links;
   }
 
   public getAuthInfo(): JSX.Element {
-    if (!this.props.auth.csrf) { return null; }
+    if (!this.props.auth.csrf) {
+      return null;
+    }
 
     return (
       <Menu.Menu position="right">
-        <Menu.Item content={this.props.auth.login} />
-        <Menu.Item content={LOG_IN_TEXT.LOG_OUT} onClick={this.onLogOut} />
+        <Menu.Item content={this.props.auth.login}/>
+        <Menu.Item content={LOG_IN_TEXT.LOG_OUT} onClick={this.onLogOut}/>
       </Menu.Menu>
     );
   }
@@ -73,7 +89,7 @@ export class AppHeader extends React.Component<IAppHeaderConnectProps> {
   public render(): JSX.Element {
     return (
       <Menu data-component="app-header">
-        <Menu.Item content={COMMON_VIEW_TEXT.TITLE} header />
+        <Menu.Item content={COMMON_VIEW_TEXT.TITLE} header/>
         {this.getNavLinks()}
         {this.getAuthInfo()}
       </Menu>

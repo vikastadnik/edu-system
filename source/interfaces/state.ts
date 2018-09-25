@@ -3,7 +3,8 @@ export interface IState {
 }
 
 export interface IAuthToken {
-  readonly  csrf: string;
+  readonly csrf: string;
+  readonly token: string;
   readonly login: string;
   readonly role: string;
 }

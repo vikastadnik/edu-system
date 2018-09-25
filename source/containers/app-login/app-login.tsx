@@ -9,6 +9,7 @@ import { IAuthToken } from '../../interfaces';
 import * as Actions from '../../actions';
 import { LOG_IN_TEXT, COMMON_VIEW_TEXT } from '../../constants';
 import './app-login.less';
+import { ErrorHandler } from '../../components/error-handler';
 
 export class AppLogin extends React.Component<IProps, IState> {
   public readonly OFFSET_WIDTH: SemanticWIDTHS = 1;
@@ -26,21 +27,20 @@ export class AppLogin extends React.Component<IProps, IState> {
 
   @autobind
   public onInputChange(e: object, change: InputOnChangeData): void {
-    const state: object = { [change.name]: change.value };
+    const state: object = {[change.name]: change.value};
     this.setState(state);
   }
 
   @autobind
   public onLogin(): void {
-    this.setState({ loading: true });
-
-    BaseAPI.logIn({ login: this.state.login, password: this.state.password })
+    this.setState({loading: true});
+    BaseAPI.logIn({login: this.state.login, password: this.state.password})
       .then((token: IAuthToken): void => {
-        this.setState({ loading: false });
+        this.setState({loading: false});
         this.props.dispatch(Actions.Auth.setAuthToken(token));
       })
       .catch((error: AxiosError): void => {
-        this.setState({ loading: false, error });
+        this.setState({loading: false, error});
       });
   }
 
@@ -68,6 +68,7 @@ export class AppLogin extends React.Component<IProps, IState> {
 
           {this.getLogInButton()}
         </Form>
+        <ErrorHandler error={this.state.error}/>
       </Segment>
     );
   }

@@ -1,9 +1,13 @@
 @import (reference) "../../index.app.less";
 
+.rt-table * {
+  outline-style: none !important;
+}
 [data-component="app-header"] {
   @width-padding: 1.14285714em;
   @height-padding: .78571429em;
 
+  height: @header-height !important;
   margin: 0em !important;
   box-shadow: none !important;
   border-top: none !important;
@@ -18,5 +22,7 @@
   &.ui.menu > .item:not(.header):not(.dropdown) a,
   &.ui.menu .ui.dropdown .menu > .item a {
     display: block;
+    color: @header-text-color;
+    padding: @height-padding @width-padding;
   }
 }

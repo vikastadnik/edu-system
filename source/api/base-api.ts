@@ -3,39 +3,39 @@
  */
 import Axios, { AxiosError, AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { LOCAL_STORAGE_KEY } from '../constants';
-import { IAuthToken } from '../interfaces';
+import { IAuthToken, IToken } from '../interfaces';
 import { API_URL_CONFIG } from '../constants/urls';
 
 export class BaseAPI {
   public static AXIOS_INSTANCE: AxiosInstance = Axios.create({});
-  public static readonly AUTH_HEADER: string = 'X-CSRF-Token';
-  public static AUTH_TOKEN: { csrf: string, login: string, role: string } =
-    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {};
+  public static readonly CSRF_HEADER: string = 'X-CSRF-Token';
+  public static readonly AUTH_HEADER: string = 'X-AUTH-Token';
+  public static AUTH_TOKEN: IToken = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {};
 
   public static setBaseURL(baseURL: string): void {
     this.AXIOS_INSTANCE.defaults.baseURL = baseURL;
-    this.AXIOS_INSTANCE.defaults.withCredentials = true;
   }
 
-  public static logIn(options: { login: string, password: string }): Promise<IAuthToken> {
-    return BaseAPI.request({ url: API_URL_CONFIG.auth.login, method: 'POST', data: options })
+  public static async logIn(options: {login: string, password: string}): Promise<IAuthToken> {
+    return BaseAPI.request({url: API_URL_CONFIG.auth.login, method: 'POST', data: options})
       .then((response: AxiosResponse): IAuthToken => {
-        if (!response.data['csrf']) {
+        if (!response.data['csrf'] || !response.data['token']) {
           throw response;
         }
 
         BaseAPI.setAuthToken({
           csrf: response.data['csrf'],
+          token: response.data['token'],
           login: response.data['login'],
           role: response.data['role']
         });
-        BaseAPI.configureAxiosInstance({ csrf: response.data['csrf'] });
+        BaseAPI.configureAxiosInstance({csrf: response.data['csrf'], token: response.data['token']});
         return response.data as IAuthToken;
       });
   }
 
   public static logOut(): Promise<void> {
-    return BaseAPI.request({ url: API_URL_CONFIG.auth.login, method: 'DELETE' })
+    return BaseAPI.request({url: API_URL_CONFIG.auth.login, method: 'DELETE'})
       .then(BaseAPI.deleteAuthToken)
       .catch(BaseAPI.deleteAuthToken);
   }
@@ -50,12 +50,16 @@ export class BaseAPI {
   /**
    * Configure Axios instance with params like headers, base URL, etc.
    */
-  private static configureAxiosInstance(options: { csrf: string }): void {
-    BaseAPI.AXIOS_INSTANCE.defaults.headers = { [BaseAPI.AUTH_HEADER]: options.csrf };
+  private static configureAxiosInstance(options: {csrf: string, token: string}): void {
+    BaseAPI.AXIOS_INSTANCE.defaults.headers = {
+      [BaseAPI.CSRF_HEADER]: options.csrf,
+      [BaseAPI.AUTH_HEADER]: options.token
+    };
   }
 
-  private static setAuthToken(options: { csrf: string; login: string, role: string }): void {
+  private static setAuthToken(options: IToken): void {
     BaseAPI.AUTH_TOKEN.csrf = options.csrf;
+    BaseAPI.AUTH_TOKEN.token = options.token;
     BaseAPI.AUTH_TOKEN.login = options.login;
     BaseAPI.AUTH_TOKEN.role = options.role;
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(BaseAPI.AUTH_TOKEN));
@@ -64,6 +68,7 @@ export class BaseAPI {
   private static deleteAuthToken(): void {
     delete BaseAPI.AUTH_TOKEN.login;
     delete BaseAPI.AUTH_TOKEN.csrf;
+    delete BaseAPI.AUTH_TOKEN.token;
     delete BaseAPI.AUTH_TOKEN.role;
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(BaseAPI.AUTH_TOKEN));
   }

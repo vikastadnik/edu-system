@@ -4,7 +4,8 @@ export enum COMMON_VIEW_TEXT {
   RESET = 'Reset',
   SAVE = 'Save',
   LOADING = 'Loading',
-  CONFIRM_DELETE = 'Delete Item?'
+  CONFIRM_DELETE = 'Delete Item?',
+  ERROR_TEXT  = 'Oops!'
 }
 
 export enum LOG_IN_TEXT {

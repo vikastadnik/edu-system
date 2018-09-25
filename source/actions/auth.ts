@@ -1,5 +1,5 @@
 import * as Redux from 'redux';
-import { IAuthToken } from '../interfaces/state';
+import { IAuthToken } from '../interfaces';
 
 export const SET_AUTH_TOKEN: string = 'SET_AUTH_TOKEN';
 export const LOG_OUT: string = 'LOG_OUT';

@@ -1,2 +1,28 @@
 @import "~react-table/react-table.css";
 @import "../semantic/dist/semantic.min.css";
+
+@default-font-size: 16px;
+@small-header-font-size: 20px;
+@header-height: 45px;
+@footer-color: #ececec;
+@header-text-color: #777;
+
+.ui.form {
+  opacity: 1 !important;
+
+  .disabled, .disabled > label {
+    opacity: 1 !important;
+  }
+}
+
+.ui.header:not(.huge) {
+  font-size: @small-header-font-size !important;
+}
+
+.ui.checkbox > label {
+  font-size: @default-font-size !important;
+}
+
+.ql-container {
+  font-size: @default-font-size !important;
+}
