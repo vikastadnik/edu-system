@@ -1,7 +1,7 @@
 /**
  * Entry point for all HTTP requests + auth functions
  */
-import Axios, { AxiosError, AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
+import Axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { LOCAL_STORAGE_KEY } from '../constants';
 import { IAuthToken, IToken } from '../interfaces';
 import { API_URL_CONFIG } from '../constants/urls';
@@ -16,22 +16,24 @@ export class BaseAPI {
     this.AXIOS_INSTANCE.defaults.baseURL = baseURL;
   }
 
-  public static async logIn(options: {login: string, password: string}): Promise<IAuthToken> {
-    return BaseAPI.request({url: API_URL_CONFIG.auth.login, method: 'POST', data: options})
-      .then((response: AxiosResponse): IAuthToken => {
-        if (!response.data['csrf'] || !response.data['token']) {
-          throw response;
-        }
+  public static async logIn(options: { login: string, password: string }): Promise<IAuthToken> {
+    const response: AxiosResponse = await BaseAPI.request({
+      url: API_URL_CONFIG.auth.login,
+      method: 'POST',
+      data: options
+    });
 
-        BaseAPI.setAuthToken({
-          csrf: response.data['csrf'],
-          token: response.data['token'],
-          login: response.data['login'],
-          role: response.data['role']
-        });
-        BaseAPI.configureAxiosInstance({csrf: response.data['csrf'], token: response.data['token']});
-        return response.data as IAuthToken;
-      });
+    if (!response.data['csrf'] || !response.data['token']) {
+      throw response;
+    }
+    BaseAPI.setAuthToken({
+      csrf: response.data['csrf'],
+      token: response.data['token'],
+      login: response.data['login'],
+      role: response.data['role']
+    });
+    BaseAPI.configureAxiosInstance({csrf: response.data['csrf'], token: response.data['token']});
+    return response.data as IAuthToken;
   }
 
   public static logOut(): Promise<void> {
@@ -40,7 +42,7 @@ export class BaseAPI {
       .catch(BaseAPI.deleteAuthToken);
   }
 
-  public static request(options: AxiosRequestConfig): AxiosPromise {
+  public static async request(options: AxiosRequestConfig): Promise<AxiosResponse> {
     return BaseAPI.AXIOS_INSTANCE.request(options)
       .catch((e: AxiosError): AxiosResponse => {
         throw e;
@@ -50,7 +52,7 @@ export class BaseAPI {
   /**
    * Configure Axios instance with params like headers, base URL, etc.
    */
-  private static configureAxiosInstance(options: {csrf: string, token: string}): void {
+  private static configureAxiosInstance(options: { csrf: string, token: string }): void {
     BaseAPI.AXIOS_INSTANCE.defaults.headers = {
       [BaseAPI.CSRF_HEADER]: options.csrf,
       [BaseAPI.AUTH_HEADER]: options.token

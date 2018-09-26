@@ -11,3 +11,8 @@ export interface IAppRoute extends RouteConfig {
   readonly caption: string;
   readonly routes?: IAppRoute[];
 }
+
+export interface IGroupDTO {
+  readonly id: string;
+  readonly name: string;
+}

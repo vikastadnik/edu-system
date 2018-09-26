@@ -4,7 +4,7 @@ import { IAppRoute } from '../../interfaces';
 import { IAppContentConnectProps } from './app-content-container';
 import { USER_ROLES } from '../../enums';
 import { ADMIN_APP_ROUTES, TEACHER_APP_ROUTES } from '../../constants';
-import { Route } from 'react-router';
+import { Route } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 
 export class AppContent extends React.Component<IAppContentConnectProps> {
