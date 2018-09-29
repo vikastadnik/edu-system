@@ -13,6 +13,6 @@ export interface IAppRoute extends RouteConfig {
 }
 
 export interface IGroupDTO {
-  readonly id: string;
-  readonly name: string;
+  readonly id?: string;
+  readonly name?: string;
 }
