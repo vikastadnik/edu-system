@@ -1,3 +1,4 @@
 import * as Auth from './auth';
+import * as Group from './group';
 
-export { Auth };
+export { Auth, Group };

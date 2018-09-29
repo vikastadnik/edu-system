@@ -1,4 +1,5 @@
 import { IAppRoute } from '../interfaces';
+import { GroupsAndStudentList } from '../components/groups-and-student-list/groups-and-student-list';
 
 export const ADMIN_APP_ROUTES: IAppRoute[] = [
   {
@@ -9,6 +10,7 @@ export const ADMIN_APP_ROUTES: IAppRoute[] = [
   {
     caption: 'Group Management',
     path: '/groups-management',
+    component: GroupsAndStudentList,
     exact: true
   }
 ];

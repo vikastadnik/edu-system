@@ -1,0 +1,11 @@
+@import (reference) "../../index.app.less";
+
+[data-component="app-content"] {
+  margin: 0em !important;
+  height: calc(~"100vh - @{header-height} * 2");
+  overflow: auto;
+
+  & > .row, & > .row > .column {
+    height: 100%;
+  }
+}

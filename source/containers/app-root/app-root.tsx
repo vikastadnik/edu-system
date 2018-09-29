@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { IAppRootConnectProps } from './app-root-container';
 import { AppLoginContainer } from '../app-login';
 import { AppHeaderContainer } from '../app-header';
+import { AppContentContainer } from '../app-content';
 
 /**
  * Root component switches between "Login" and "Content" components
@@ -21,8 +22,7 @@ export class AppRoot extends React.Component<IAppRootConnectProps> {
   public getContentRoute(): JSX.Element {
     return (
       <React.Fragment>
-        <AppHeaderContainer/>
-        <h1>{'Logged!'}</h1>
+        <AppContentContainer />
       </React.Fragment>
     );
   }

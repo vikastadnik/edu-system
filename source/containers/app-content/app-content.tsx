@@ -6,6 +6,7 @@ import { USER_ROLES } from '../../enums';
 import { ADMIN_APP_ROUTES, TEACHER_APP_ROUTES } from '../../constants';
 import { Route } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
+import './app-content.less';
 
 export class AppContent extends React.Component<IAppContentConnectProps> {
   constructor(props: IAppContentConnectProps) {

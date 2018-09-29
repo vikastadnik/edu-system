@@ -14,3 +14,6 @@ export enum LOG_IN_TEXT {
   LOG_IN = 'Log In',
   LOG_OUT = 'Log Out'
 }
+export enum GROUP_TEXT {
+  GROUPS_HEADER = 'Groups List'
+}
