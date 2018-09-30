@@ -2,7 +2,7 @@ import { IGroupDTO } from './index';
 
 export interface IState {
   readonly auth: IAuthToken;
-  readonly group: IGroup;
+  readonly groups: IGroups;
 }
 
 export interface IAuthToken {
@@ -12,13 +12,11 @@ export interface IAuthToken {
   readonly role: string;
 }
 
-export interface IGroup {
-  readonly id: number;
-  readonly data: IGroupDTO;
-  readonly students: IStudent[];
-  readonly selectedStudentID: string;
-
-  readonly loading: boolean;
+export interface IGroups {
+  readonly groupsList: IGroupDTO[];
+  readonly selectedGroupID: number;
+  readonly selectedGroupStudents: IStudent[];
+  readonly selectedStudentID: number;
 }
 
 export interface IStudent {

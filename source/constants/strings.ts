@@ -5,7 +5,7 @@ export enum COMMON_VIEW_TEXT {
   SAVE = 'Save',
   LOADING = 'Loading',
   CONFIRM_DELETE = 'Delete Item?',
-  ERROR_TEXT  = 'Oops!'
+  ERROR_TEXT = 'Oops!'
 }
 
 export enum LOG_IN_TEXT {
@@ -14,6 +14,16 @@ export enum LOG_IN_TEXT {
   LOG_IN = 'Log In',
   LOG_OUT = 'Log Out'
 }
+
 export enum GROUP_TEXT {
-  GROUPS_HEADER = 'Groups List'
+  GROUPS_HEADER = 'Groups List',
+  NAME = 'Name',
+  FACULTY = 'Faculty'
+}
+
+export enum MODALS_TEXT {
+  SAVE = 'Save',
+  CANCEL = 'Cancel',
+  EDIT_GROUP = 'Edit Group',
+  ADD_GROUP = 'Add group'
 }

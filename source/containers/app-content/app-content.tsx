@@ -32,10 +32,10 @@ export class AppContent extends React.Component<IAppContentConnectProps> {
       const item: IAppRoute = root[i];
       const route: JSX.Element = (
         <Route
+          component={item.component}
           key={item.path}
           path={item.path}
           exact={item.exact}
-          component={item.component}
         />
       );
       routes.push(route);

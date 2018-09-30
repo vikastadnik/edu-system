@@ -22,7 +22,7 @@ gulp.task('start', (callback) => {
     'build-clean',
     'build-copy-static-files',
     'build-tslint',
-    'build-semantic',
+    // 'build-semantic',
     'build-get-info', [
       'build-webpack-dev-server',
       'build-watch'

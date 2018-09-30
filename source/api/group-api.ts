@@ -15,4 +15,20 @@ export class GroupApi {
 
     return groupList.data as IGroupDTO[];
   }
+
+  public static async createGroup(options: IGroupDTO): Promise<AxiosResponse> {
+    return BaseAPI.request({
+      url: API_URL_CONFIG.group.getGroupsList,
+      method: 'POST',
+      data: options
+    });
+  }
+
+  public static async updateGroup(options: IGroupDTO): Promise<AxiosResponse> {
+    return BaseAPI.request({
+      url: API_URL_CONFIG.group.getGroupsList,
+      method: 'POST',
+      data: options
+    });
+  }
 }
