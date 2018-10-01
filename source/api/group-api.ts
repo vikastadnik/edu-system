@@ -16,12 +16,14 @@ export class GroupApi {
     return groupList.data as IGroupDTO[];
   }
 
-  public static async createGroup(options: IGroupDTO): Promise<AxiosResponse> {
-    return BaseAPI.request({
+  public static async createGroup(options: IGroupDTO): Promise<IGroupDTO> {
+    const response: AxiosResponse = await BaseAPI.request({
       url: API_URL_CONFIG.group.getGroupsList,
       method: 'POST',
       data: options
     });
+
+    return response.data as IGroupDTO;
   }
 
   public static async updateGroup(options: IGroupDTO): Promise<AxiosResponse> {

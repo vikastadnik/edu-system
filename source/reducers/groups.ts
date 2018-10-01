@@ -1,7 +1,7 @@
 import * as Actions from '../actions';
 import { IGroups } from '../interfaces';
 
-export type ActionType = Actions.Groups.ISetGroupAttribute & Actions.Groups.ISetGroupsList;
+export type ActionType = Actions.Groups.ISetGroupAttribute;
 
 const initialState: IGroups = {
   groupsList: [],
@@ -13,9 +13,7 @@ const initialState: IGroups = {
 export function groups(state: IGroups = initialState, action: ActionType): IGroups {
   switch (action.type) {
     case Actions.Groups.SET_GROUP_ATTRIBUTE:
-      return { ...state, selectedGroupID: action.selectedGroupID };
-    case Actions.Groups.SET_GROUPS_LIST:
-      return { ...state, groupsList: action.groupsList };
+      return { ...state, ...action.groups };
     default:
       return state;
   }
