@@ -45,7 +45,7 @@ export class AddEditGroupModal extends React.Component<IProps, IState> {
   public async onConfirm(): Promise<void> {
     try {
       this.setState({loading: true});
-      if (this.props.mode === 'EDIT') {
+      if (this.props.mode === 'ADD') {
         const createdGroup: IGroupDTO = await GroupApi.createGroup({...this.state.activeGroup});
         this.props.dispatch(Actions.Groups.setGroupAttribute({groupsList: [...this.props.groupList, createdGroup]}));
       } else {
@@ -119,12 +119,14 @@ export class AddEditGroupModal extends React.Component<IProps, IState> {
     };
 
     const modalTitle: string = this.props.mode === 'EDIT' ? MODALS_TEXT.EDIT_GROUP : MODALS_TEXT.ADD_GROUP;
+    const disabled: boolean = !(this.props.mode === 'EDIT' && this.props.selectedGroupID);
     return (
       <React.Fragment>
         <Button
           content={modalTitle}
           onClick={onOpen}
           icon="edit"
+          disabled={disabled}
           primary
           fluid
         />

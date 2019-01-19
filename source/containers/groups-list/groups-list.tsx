@@ -12,7 +12,6 @@ export class GroupsList extends React.Component<IProps, IState> {
     super(props);
     this.state = {
       loading: false,
-      groupsList: [],
       error: null,
     };
   }
@@ -21,7 +20,7 @@ export class GroupsList extends React.Component<IProps, IState> {
     try {
       this.setState({ loading: true });
       const groupsList: IGroupDTO[] = await GroupApi.getGroupsList();
-      this.setState({ groupsList, loading: false });
+      this.setState({ loading: false });
       this.props.dispatch(Actions.Groups.setGroupAttribute({groupsList}));
     } catch (error) {
       this.setState({ error });
@@ -35,13 +34,12 @@ export class GroupsList extends React.Component<IProps, IState> {
 
   public render(): JSX.Element {
     return (
-      <GroupListView {...this.state} onSelect={this.onSelect}/>
+      <GroupListView {...this.state} groupsList={this.props.groups} onSelect={this.onSelect}/>
     );
   }
 }
 
 export interface IState {
   readonly loading: boolean;
-  readonly groupsList: IGroupDTO[];
   readonly error: AxiosError;
 }

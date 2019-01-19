@@ -6,6 +6,7 @@ import { DEFAULT_PAGE_SIZE, GROUP_TEXT, TABLE_SELECTION_BACKGROUND_COLOR } from 
 import { IGroupDTO } from '../../interfaces';
 import { AxiosError } from 'axios';
 import { ErrorHandler } from '../error-handler';
+import { AddEditGroupModalContainer } from '../../containers/add-edit-group-modal';
 
 export class GroupListView extends React.Component<IProps, IState> {
   constructor(props: IProps) {
@@ -19,6 +20,7 @@ export class GroupListView extends React.Component<IProps, IState> {
   public getTrProps(table: object, row: RowInfo): object {
     const onClick: () => void = (): void => {
       this.setState({ selectedID: row.original.id });
+      console.log(row.original.id);
       this.props.onSelect(row.original.id);
     };
 
@@ -58,7 +60,11 @@ export class GroupListView extends React.Component<IProps, IState> {
 
         <Grid.Row columns="equal">
           <Grid.Column>
-            {/*<AddEditGroupModalContainer mode={'ADD'}/>*/}
+            <AddEditGroupModalContainer mode={'ADD'}/>
+          </Grid.Column>
+
+          <Grid.Column>
+            <AddEditGroupModalContainer mode={'EDIT'}/>
           </Grid.Column>
         </Grid.Row>
       </React.Fragment>
