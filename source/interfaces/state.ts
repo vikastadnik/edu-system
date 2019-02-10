@@ -15,8 +15,6 @@ export interface IAuthToken {
 export interface IGroups {
   readonly groupsList: IGroupDTO[];
   readonly selectedGroupID: number;
-  readonly selectedGroupStudents: IStudent[];
-  readonly selectedStudentID: number;
 }
 
 export interface IStudent {

@@ -8,7 +8,7 @@ import { autobind } from 'core-decorators';
 import { IAddEditGroupModalConnectedProps as IProps } from './add-edit-group-modal-container';
 import { GroupInfoForm } from '../../components/group-info-form';
 import { GroupApi } from '../../api';
-import { ErrorHandler } from '../../components/error-handler';
+// import { ErrorHandler } from '../../components/error-handler';
 
 export class AddEditGroupModal extends React.Component<IProps, IState> {
   constructor(props: IProps) {
@@ -83,7 +83,7 @@ export class AddEditGroupModal extends React.Component<IProps, IState> {
   }
 
   public getModalContent(): JSX.Element {
-    const error: JSX.Element = this.state.error ? <ErrorHandler error={this.state.error}/> : null;
+    const error: JSX.Element = this.state.error ? null : null;
     return (
       <Grid>
         <Grid.Row>
@@ -126,7 +126,7 @@ export class AddEditGroupModal extends React.Component<IProps, IState> {
           content={modalTitle}
           onClick={onOpen}
           icon="edit"
-          disabled={disabled}
+          disabled={this.props.mode === 'ADD' ? false : disabled}
           primary
           fluid
         />

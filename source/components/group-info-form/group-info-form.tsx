@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { IGroupDTO } from '../../interfaces';
-import { Form, InputOnChangeData } from 'semantic-ui-react';
-import { GROUP_TEXT } from '../../constants';
+import { Form, InputOnChangeData, Dropdown, DropdownItemProps } from 'semantic-ui-react';
+import { GROUP_TEXT, PLACEHOLDERS } from '../../constants';
 import { autobind } from 'core-decorators';
+import { COURSES } from '../../enums';
 
 /**
  * Entry point for "Add or Edit Group Information" form
@@ -16,6 +17,17 @@ export class GroupInfoForm extends React.Component<IProps> {
   @autobind
   public onInputChange(e: object, change: InputOnChangeData): void {
     this.props.onChange({ [change.name]: change.value });
+  }
+
+  /** Convert  data to Semantic UI options */
+  public getCoursesOptions(): DropdownItemProps[] {
+    const options: DropdownItemProps[] = [];
+    for (const value in COURSES) {
+      if (typeof COURSES[value] === 'number') {
+        options.push({ value: COURSES[value], text: COURSES[value] });
+      }
+    }
+    return options;
   }
 
   public render(): JSX.Element {
@@ -36,6 +48,15 @@ export class GroupInfoForm extends React.Component<IProps> {
           onChange={this.onInputChange}
           name="faculty"
           type="text"
+          required
+        />
+
+        <Dropdown
+          placeholder={PLACEHOLDERS.SELECT_COURSE}
+          label={GROUP_TEXT.COURSE}
+          search
+          selection
+          options={this.getCoursesOptions()}
           required
         />
       </Form>

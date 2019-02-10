@@ -16,4 +16,5 @@ export interface IGroupDTO {
   readonly id?: number;
   readonly name?: string;
   readonly faculty?: string;
+  readonly course?: number;
 }

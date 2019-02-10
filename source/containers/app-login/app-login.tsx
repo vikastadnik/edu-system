@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Grid, InputOnChangeData, Loader, Segment, SemanticWIDTHS } from 'semantic-ui-react';
+import { Form, Grid, InputOnChangeData, Segment, SemanticWIDTHS } from 'semantic-ui-react';
 import { autobind } from 'core-decorators';
 import { IAppLoginConnectedProps as IProps } from './app-login-container';
 import { AppHeaderContainer } from '../app-header';
@@ -7,12 +7,12 @@ import { AxiosError } from 'axios';
 import { BaseAPI } from '../../api';
 import { IAuthToken } from '../../interfaces';
 import * as Actions from '../../actions';
-import { LOG_IN_TEXT, COMMON_VIEW_TEXT } from '../../constants';
+import { LOG_IN_TEXT } from '../../constants';
 import './app-login.less';
 import { ErrorHandler } from '../../components/error-handler';
 
 export class AppLogin extends React.Component<IProps, IState> {
-  public readonly OFFSET_WIDTH: SemanticWIDTHS = 1;
+  public readonly OFFSET_WIDTH: SemanticWIDTHS = 5;
   public readonly CONTENT_WIDTH: SemanticWIDTHS = 5;
 
   constructor(props: IProps) {
@@ -27,29 +27,31 @@ export class AppLogin extends React.Component<IProps, IState> {
 
   @autobind
   public onInputChange(e: object, change: InputOnChangeData): void {
-    const state: object = {[change.name]: change.value};
+    const state: object = { [change.name]: change.value };
     this.setState(state);
   }
 
   @autobind
   public async onLogin(): Promise<void> {
     try {
-      this.setState({loading: true});
-      const token: IAuthToken = await BaseAPI.logIn({login: this.state.login, password: this.state.password});
-      this.setState({loading: false});
+      this.setState({ loading: true });
+      const token: IAuthToken = await BaseAPI.logIn({ login: this.state.login, password: this.state.password });
+      this.setState({ loading: false });
       this.props.dispatch(Actions.Auth.setAuthToken(token));
     } catch (error) {
-      this.setState({loading: false, error});
+      this.setState({ error, loading: false });
     }
   }
 
   public getLogInForm(): JSX.Element {
+    const { loading, error, login, password } = this.state;
+    const errorMessage: string = error ? error.message : null;
     return (
-      <Segment raised data-component="login-form">
-        <Form autoComplete="on">
+      <Segment raised data-component="login-form" style={{ marginTop: '4rem' }}>
+        <Form autoComplete="on" loading={loading}>
           <Form.Input
             label={LOG_IN_TEXT.USERNAME}
-            value={this.state.login}
+            value={login}
             onChange={this.onInputChange}
             name="login"
             type="text"
@@ -58,7 +60,7 @@ export class AppLogin extends React.Component<IProps, IState> {
 
           <Form.Input
             label={LOG_IN_TEXT.PASSWORD}
-            value={this.state.password}
+            value={password}
             onChange={this.onInputChange}
             name="password"
             type="password"
@@ -67,18 +69,18 @@ export class AppLogin extends React.Component<IProps, IState> {
 
           {this.getLogInButton()}
         </Form>
-        <ErrorHandler error={this.state.error}/>
+        <ErrorHandler error={errorMessage}/>
       </Segment>
     );
   }
 
   public getLogInButton(): JSX.Element {
+    const disabled: boolean = !this.state.login || !this.state.password;
     return (
       <Form.Button
         content={LOG_IN_TEXT.LOG_IN}
         onClick={this.onLogin}
-        loading={this.state.loading}
-        disabled={this.state.loading}
+        disabled={disabled}
         primary
         fluid
       />
@@ -86,31 +88,18 @@ export class AppLogin extends React.Component<IProps, IState> {
   }
 
   public render(): JSX.Element {
-    const loader: JSX.Element = (
-      <Grid.Row columns="equal">
-        <Grid.Column>
-          <Loader content={COMMON_VIEW_TEXT.LOADING} active inline="centered"/>
-        </Grid.Column>
-      </Grid.Row>
-    );
-
-    const content: JSX.Element = (
-      <Grid.Row columns={2}>
-        <Grid.Column width={this.OFFSET_WIDTH}/>
-        <Grid.Column width={this.CONTENT_WIDTH}>
-          {this.getLogInForm()}
-        </Grid.Column>
-      </Grid.Row>
-    );
-
     return (
-      <React.Fragment>
+      <>
         <AppHeaderContainer/>
-
         <Grid data-component="app-login">
-          {this.state.loading ? loader : content}
+          <Grid.Row columns={2}>
+            <Grid.Column width={this.OFFSET_WIDTH}/>
+            <Grid.Column width={this.CONTENT_WIDTH}>
+              {this.getLogInForm()}
+            </Grid.Column>
+          </Grid.Row>
         </Grid>
-      </React.Fragment>
+      </>
     );
   }
 }

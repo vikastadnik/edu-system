@@ -1,29 +1,34 @@
 export enum COMMON_VIEW_TEXT {
-  TITLE = 'Education System',
-  SEARCH = 'Search',
+  TITLE = 'Електронна система деканату',
+  SEARCH = 'Пошук',
   RESET = 'Reset',
-  SAVE = 'Save',
+  SAVE = 'Зберегти',
   LOADING = 'Loading',
   CONFIRM_DELETE = 'Delete Item?',
-  ERROR_TEXT = 'Oops!'
+  ERROR_TEXT = 'Щось пішло не так!'
 }
 
 export enum LOG_IN_TEXT {
-  USERNAME = 'Username',
-  PASSWORD = 'Password',
-  LOG_IN = 'Log In',
-  LOG_OUT = 'Log Out'
+  USERNAME = 'Логін',
+  PASSWORD = 'Пароль',
+  LOG_IN = 'Увійти',
+  LOG_OUT = 'Вийти'
 }
 
 export enum GROUP_TEXT {
-  GROUPS_HEADER = 'Groups List',
-  NAME = 'Name',
-  FACULTY = 'Faculty'
+  GROUPS_HEADER = 'Список груп',
+  NAME = 'Номер',
+  FACULTY = 'Факультет',
+  COURSE = 'Курс'
 }
 
 export enum MODALS_TEXT {
-  SAVE = 'Save',
-  CANCEL = 'Cancel',
-  EDIT_GROUP = 'Edit Group',
-  ADD_GROUP = 'Add group'
+  SAVE = 'Зберегти',
+  CANCEL = 'Відмінити',
+  EDIT_GROUP = 'Редагувати',
+  ADD_GROUP = 'Додати групу'
+}
+
+export enum PLACEHOLDERS {
+  SELECT_COURSE = 'Оберіть курс'
 }

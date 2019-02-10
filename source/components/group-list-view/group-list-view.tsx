@@ -20,7 +20,6 @@ export class GroupListView extends React.Component<IProps, IState> {
   public getTrProps(table: object, row: RowInfo): object {
     const onClick: () => void = (): void => {
       this.setState({ selectedID: row.original.id });
-      console.log(row.original.id);
       this.props.onSelect(row.original.id);
     };
 
@@ -47,7 +46,7 @@ export class GroupListView extends React.Component<IProps, IState> {
   }
 
   public render(): JSX.Element {
-    const errorHandler: JSX.Element = this.props.error ? <ErrorHandler error={this.props.error}/> : null;
+    const errorHandler: JSX.Element = this.props.error ? <ErrorHandler error={this.props.error.message}/> : null;
     return (
       <React.Fragment>
         <Header size="large">{GROUP_TEXT.GROUPS_HEADER}</Header>

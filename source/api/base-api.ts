@@ -52,7 +52,7 @@ export class BaseAPI {
   /**
    * Configure Axios instance with params like headers, base URL, etc.
    */
-  private static configureAxiosInstance(options: { csrf: string, token: string }): void {
+  public static configureAxiosInstance(options: { csrf: string, token: string }): void {
     BaseAPI.AXIOS_INSTANCE.defaults.headers = {
       [BaseAPI.CSRF_HEADER]: options.csrf,
       [BaseAPI.AUTH_HEADER]: options.token

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';
-import { IAuthToken, IState } from '../../interfaces/state';
+import { IAuthToken, IState } from '../../interfaces';
 import { AppLogin } from './app-login';
 
 export interface IAppLoginProps {

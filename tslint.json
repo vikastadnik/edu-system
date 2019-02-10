@@ -52,10 +52,10 @@
       "spaces",
       2
     ],
-    "linebreak-style": [
-      true,
-      "LF"
-    ],
+//    "linebreak-style": [
+//      true,
+//      "LF"
+//    ],
     "max-file-line-count": [
       true,
       1000

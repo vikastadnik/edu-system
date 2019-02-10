@@ -21,7 +21,7 @@ export class GroupsList extends React.Component<IProps, IState> {
       this.setState({ loading: true });
       const groupsList: IGroupDTO[] = await GroupApi.getGroupsList();
       this.setState({ loading: false });
-      this.props.dispatch(Actions.Groups.setGroupAttribute({groupsList}));
+      this.props.dispatch(Actions.Groups.setGroups(groupsList));
     } catch (error) {
       this.setState({ error });
     }
@@ -29,7 +29,7 @@ export class GroupsList extends React.Component<IProps, IState> {
 
   @autobind
   public onSelect(selectedGroupID: number): void {
-    this.props.dispatch(Actions.Groups.setGroupAttribute({selectedGroupID}));
+    this.props.dispatch(Actions.Groups.setGroupAttribute({ selectedGroupID }));
   }
 
   public render(): JSX.Element {
