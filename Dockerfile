@@ -1,6 +1,6 @@
 FROM node:10.15-jessie as build-deps
 WORKDIR /usr/src/app
-COPY *.json yarn.lock ./
+COPY *.json ./
 RUN yarn install
 COPY . ./
 RUN yarn run build-target
