@@ -1,9 +1,9 @@
 FROM node:10.15-jessie as build-deps
 WORKDIR /usr/src/app
-COPY *.json ./
-RUN npm install
+COPY *.json yarn.lock ./
+RUN yarn install
 COPY . ./
-RUN npm run build-target
+RUN yarn run build-target
 
 # Stage 2 - the production environment
 FROM nginx
