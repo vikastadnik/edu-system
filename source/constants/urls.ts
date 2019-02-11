@@ -7,7 +7,7 @@ export const API_URL_CONFIG: {
   }
 } = {
   auth: {
-    login: '/api/users/login'
+    login: '/api/users/session'
   },
   group: {
     getGroupsList: '/api/groups'

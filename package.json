@@ -4,7 +4,7 @@
   "license": "UNLICENSED",
   "description": "Education System",
   "scripts": {
-    "build-target": "cross-env NODE_ENV=production gulp build",
+    "build-target": "gulp build",
     "build-app": "cross-env NODE_ENV=development gulp build",
     "start": "cross-env NODE_ENV=development gulp start"
   },

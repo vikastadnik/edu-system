@@ -23,12 +23,11 @@ export class BaseAPI {
       data: options
     });
 
-    if (!response.data['csrf'] || !response.data['token']) {
+    if (!response.data['csrf']) {
       throw response;
     }
     BaseAPI.setAuthToken({
       csrf: response.data['csrf'],
-      token: response.data['token'],
       login: response.data['login'],
       role: response.data['role']
     });
@@ -61,7 +60,6 @@ export class BaseAPI {
 
   private static setAuthToken(options: IToken): void {
     BaseAPI.AUTH_TOKEN.csrf = options.csrf;
-    BaseAPI.AUTH_TOKEN.token = options.token;
     BaseAPI.AUTH_TOKEN.login = options.login;
     BaseAPI.AUTH_TOKEN.role = options.role;
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(BaseAPI.AUTH_TOKEN));
@@ -70,7 +68,6 @@ export class BaseAPI {
   private static deleteAuthToken(): void {
     delete BaseAPI.AUTH_TOKEN.login;
     delete BaseAPI.AUTH_TOKEN.csrf;
-    delete BaseAPI.AUTH_TOKEN.token;
     delete BaseAPI.AUTH_TOKEN.role;
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(BaseAPI.AUTH_TOKEN));
   }

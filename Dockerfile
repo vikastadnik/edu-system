@@ -1,7 +1,7 @@
 FROM node:10.15-jessie as build-deps
 WORKDIR /usr/src/app
 COPY *.json ./
-RUN yarn install
+RUN yarn install --silent
 COPY . ./
 RUN yarn run build-target
 

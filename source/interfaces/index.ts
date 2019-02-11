@@ -3,7 +3,6 @@ export * from './state';
 
 export interface IToken {
   csrf: string;
-  token: string;
   login: string;
   role: string;
 }
