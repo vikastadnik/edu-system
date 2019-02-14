@@ -9,7 +9,7 @@ gulp.task('build', (callback) => {
     'build-clean',
     'build-copy-static-files',
     'build-tslint',
-    'build-semantic',
+    // 'build-semantic',
     'build-get-info',
     'build-webpack'
   ];
@@ -82,5 +82,4 @@ gulp.task('build-webpack-dev-server', (callback) => {
 gulp.task('build-watch', () => {
   gulp.watch(path.join(tasks.paths.source, '**', '*.?(ts|tsx)'), ['build-tslint']);
   gulp.watch(path.join(tasks.paths.static, '**', '*.*'), ['build-copy-static-files']);
-  gulp.watch(path.join(tasks.paths.semantic, '**', '*.*'), ['build-semantic']);
 });
