@@ -17,6 +17,7 @@ export class BaseAPI {
   }
 
   public static async logIn(options: { login: string, password: string }): Promise<IAuthToken> {
+    // try {
     const response: AxiosResponse = await BaseAPI.request({
       url: API_URL_CONFIG.auth.login,
       method: 'POST',
@@ -31,12 +32,12 @@ export class BaseAPI {
       login: response.data['login'],
       role: response.data['role']
     });
-    BaseAPI.configureAxiosInstance({csrf: response.data['csrf'], token: response.data['token']});
+    BaseAPI.configureAxiosInstance({ csrf: response.data['csrf'], token: response.data['token'] });
     return response.data as IAuthToken;
   }
 
   public static logOut(): Promise<void> {
-    return BaseAPI.request({url: API_URL_CONFIG.auth.login, method: 'DELETE'})
+    return BaseAPI.request({ url: API_URL_CONFIG.auth.login, method: 'DELETE' })
       .then(BaseAPI.deleteAuthToken)
       .catch(BaseAPI.deleteAuthToken);
   }

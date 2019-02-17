@@ -45,7 +45,7 @@ export class AppLogin extends React.Component<IProps, IState> {
 
   public getLogInForm(): JSX.Element {
     const { loading, error, login, password } = this.state;
-    const errorMessage: string = error ? error.message : null;
+    const errorMessage: string = error ? error.response.data.message : null;
     return (
       <Segment raised data-component="login-form" style={{ marginTop: '4rem' }}>
         <Form autoComplete="on" loading={loading}>

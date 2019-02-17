@@ -4,6 +4,9 @@ export const API_URL_CONFIG: {
   },
   readonly group: {
     readonly getGroupsList: string;
+  },
+  readonly student: {
+    readonly  createStudent: string
   }
 } = {
   auth: {
@@ -11,5 +14,8 @@ export const API_URL_CONFIG: {
   },
   group: {
     getGroupsList: '/api/groups'
+  },
+  student: {
+    createStudent: '/api/students'
   }
 };

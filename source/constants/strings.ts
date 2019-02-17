@@ -5,7 +5,7 @@ export enum COMMON_VIEW_TEXT {
   SAVE = 'Зберегти',
   LOADING = 'Loading',
   CONFIRM_DELETE = 'Delete Item?',
-  ERROR_TEXT = 'Щось пішло не так!'
+  ERROR_TEXT = 'Упс!'
 }
 
 export enum LOG_IN_TEXT {

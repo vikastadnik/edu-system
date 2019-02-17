@@ -17,3 +17,12 @@ export interface IGroupDTO {
   readonly faculty?: string;
   readonly course?: number;
 }
+
+export interface IStudentDTO {
+  uuid: string;
+  email: string;
+  group: string;
+  name: string;
+  surname: string;
+  ticket: string;
+}

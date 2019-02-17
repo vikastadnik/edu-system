@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
@@ -34,7 +36,8 @@ module.exports = {
     historyApiFallback: true,
     stats: {
       children: false
-    }
+    },
+    disableHostCheck: true
   },
 
   module: {
@@ -45,9 +48,9 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-            options: { 'presets': ['env'] }
+            options: {'presets': ['env']}
           },
-          { loader: 'ts-loader' }
+          {loader: 'ts-loader'}
         ]
       },
       /* Extract common file types and place them in target "STATIC_PATH" folder */
@@ -69,8 +72,8 @@ module.exports = {
         test: /\.less$/,
         use: ExtractTextPlugin.extract({
           use: [
-            { loader: 'css-loader' },
-            { loader: 'less-loader' }
+            {loader: 'css-loader'},
+            {loader: 'less-loader'}
           ]
         })
       },
@@ -86,7 +89,10 @@ module.exports = {
 
   plugins: [
     /* Extract styles to same location as application bundle */
-    new ExtractTextPlugin(path.join(STATIC_PATH, 'css', 'styles.bundle.css'))
+    new ExtractTextPlugin(path.join(STATIC_PATH, 'css', 'styles.bundle.css')),
+    new webpack.DefinePlugin({
+      'process.env.HOST': JSON.stringify(process.env.HOST)
+    })
   ]
 };
 
