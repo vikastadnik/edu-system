@@ -10,12 +10,12 @@ export const API_URL_CONFIG: {
   }
 } = {
   auth: {
-    login: '/api/users/session'
+    login: '/users/session'
   },
   group: {
-    getGroupsList: '/api/groups'
+    getGroupsList: '/groups'
   },
   student: {
-    createStudent: '/api/students'
+    createStudent: '/students'
   }
 };

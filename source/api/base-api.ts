@@ -9,7 +9,6 @@ import { API_URL_CONFIG } from '../constants/urls';
 export class BaseAPI {
   public static AXIOS_INSTANCE: AxiosInstance = Axios.create({});
   public static readonly CSRF_HEADER: string = 'X-CSRF-Token';
-  public static readonly AUTH_HEADER: string = 'X-AUTH-Token';
   public static AUTH_TOKEN: IToken = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {};
 
   public static setBaseURL(baseURL: string): void {
@@ -32,7 +31,7 @@ export class BaseAPI {
       login: response.data['login'],
       role: response.data['role']
     });
-    BaseAPI.configureAxiosInstance({ csrf: response.data['csrf'], token: response.data['token'] });
+    BaseAPI.configureAxiosInstance({ csrf: response.data['csrf'] });
     return response.data as IAuthToken;
   }
 
@@ -52,10 +51,9 @@ export class BaseAPI {
   /**
    * Configure Axios instance with params like headers, base URL, etc.
    */
-  public static configureAxiosInstance(options: { csrf: string, token: string }): void {
+  public static configureAxiosInstance(options: { csrf: string }): void {
     BaseAPI.AXIOS_INSTANCE.defaults.headers = {
       [BaseAPI.CSRF_HEADER]: options.csrf,
-      [BaseAPI.AUTH_HEADER]: options.token
     };
   }
 

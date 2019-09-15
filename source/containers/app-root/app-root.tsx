@@ -20,7 +20,7 @@ export class AppRoot extends React.Component<IAppRootConnectProps> {
     const authToken: IAuthToken = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
     if (authToken) {
       this.props.dispatch(Actions.Auth.setAuthToken(authToken));
-      BaseAPI.configureAxiosInstance({csrf: authToken.csrf, token: authToken.token});
+      BaseAPI.configureAxiosInstance({csrf: authToken.csrf});
     }
   }
 

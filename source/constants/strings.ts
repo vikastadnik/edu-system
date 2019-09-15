@@ -32,3 +32,7 @@ export enum MODALS_TEXT {
 export enum PLACEHOLDERS {
   SELECT_COURSE = 'Оберіть курс'
 }
+
+export enum ERROR_MESSAGES {
+  SORRY_REQUEST_FAILED = 'Вибачте, запит не вдалось виконати. Спробуйте пізніше'
+}

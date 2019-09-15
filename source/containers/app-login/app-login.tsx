@@ -7,7 +7,7 @@ import { AxiosError } from 'axios';
 import { BaseAPI } from '../../api';
 import { IAuthToken } from '../../interfaces';
 import * as Actions from '../../actions';
-import { LOG_IN_TEXT } from '../../constants';
+import { ERROR_MESSAGES, LOG_IN_TEXT } from '../../constants';
 import './app-login.less';
 import { ErrorHandler } from '../../components/error-handler';
 
@@ -45,7 +45,13 @@ export class AppLogin extends React.Component<IProps, IState> {
 
   public getLogInForm(): JSX.Element {
     const { loading, error, login, password } = this.state;
-    const errorMessage: string = error ? error.response.data.message : null;
+    let errorMessage: string = null;
+    if (error && error.response) {
+      errorMessage = error.response.data.message;
+    } else if (error && !error.response) {
+      errorMessage = ERROR_MESSAGES.SORRY_REQUEST_FAILED;
+    }
+
     return (
       <Segment raised data-component="login-form" style={{ marginTop: '4rem' }}>
         <Form autoComplete="on" loading={loading}>

@@ -37,7 +37,8 @@ module.exports = {
     stats: {
       children: false
     },
-    disableHostCheck: true
+    disableHostCheck: true,
+    port: 9000
   },
 
   module: {
