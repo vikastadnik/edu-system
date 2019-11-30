@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IGroupDTO } from '../../interfaces';
+import { IGroupDTO, ISpecialityDTO } from '../../interfaces';
 import { Form, InputOnChangeData, Dropdown, DropdownItemProps } from 'semantic-ui-react';
 import { GROUP_TEXT, PLACEHOLDERS } from '../../constants';
 import { autobind } from 'core-decorators';
@@ -10,12 +10,14 @@ import { COURSES } from '../../enums';
  */
 
 export class GroupInfoForm extends React.Component<IProps> {
-  constructor(props: IProps) {
-    super(props);
-  }
 
   @autobind
   public onInputChange(e: object, change: InputOnChangeData): void {
+    this.props.onChange({ [change.name]: change.value });
+  }
+
+  @autobind
+  public onDropDownChange(e: object, change: any): void {
     this.props.onChange({ [change.name]: change.value });
   }
 
@@ -30,9 +32,17 @@ export class GroupInfoForm extends React.Component<IProps> {
     return options;
   }
 
+  /** Convert  data to Semantic UI options */
+  @autobind
+  public getSpecialitiesOptions(): DropdownItemProps[] {
+    return this.props.specialities.map((speciality: ISpecialityDTO) => {
+      return { value: speciality.uuid, text: speciality.name };
+    });
+  }
+
   public render(): JSX.Element {
     return (
-      <Form loading={this.props.loading}>
+      <>
         <Form.Input
           label={GROUP_TEXT.NAME}
           value={this.props.data.name || ''}
@@ -41,32 +51,38 @@ export class GroupInfoForm extends React.Component<IProps> {
           type="text"
           required
         />
-
-        <Form.Input
-          label={GROUP_TEXT.FACULTY}
-          value={this.props.data.faculty || ''}
-          onChange={this.onInputChange}
-          name="faculty"
-          type="text"
-          required
-        />
-
-        <Dropdown
-          placeholder={PLACEHOLDERS.SELECT_COURSE}
-          label={GROUP_TEXT.COURSE}
-          search
-          selection
-          options={this.getCoursesOptions()}
-          required
-        />
-      </Form>
+        <Form.Group widths="equal">
+          <Dropdown
+            placeholder={PLACEHOLDERS.SELECT_COURSE}
+            name="course"
+            label={GROUP_TEXT.COURSE}
+            search
+            selection
+            options={this.getCoursesOptions()}
+            onChange={this.onDropDownChange}
+            required
+            fluid
+          />
+          <Dropdown
+            placeholder={PLACEHOLDERS.SELECT_SPECIALITY}
+            label={GROUP_TEXT.COURSE}
+            name="specialtyUuid"
+            search
+            selection
+            options={this.getSpecialitiesOptions()}
+            required
+            fluid
+            onChange={this.onDropDownChange}
+          />
+        </Form.Group>
+      </>
     );
   }
 }
 
 export interface IProps {
   readonly data: IGroupDTO;
-  readonly loading: boolean;
+  readonly specialities: ISpecialityDTO[];
 
   onChange(data: IGroupDTO): void;
 }

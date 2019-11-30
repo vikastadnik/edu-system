@@ -3,15 +3,14 @@ import { AppHeaderContainer } from '../app-header';
 import { IAppRoute } from '../../interfaces';
 import { IAppContentConnectProps } from './app-content-container';
 import { USER_ROLES } from '../../enums';
-import { ADMIN_APP_ROUTES, TEACHER_APP_ROUTES } from '../../constants';
+import { ADMIN_APP_ROUTES, SUBJECT, TEACHER_APP_ROUTES } from '../../constants';
+import Subject from '../../components/subjects/subject/subject';
 import { Route } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 import './app-content.less';
+import AddSubject from '../../components/subjects/add-subject-modal';
 
 export class AppContent extends React.Component<IAppContentConnectProps> {
-  constructor(props: IAppContentConnectProps) {
-    super(props);
-  }
 
   public getRoutes(root?: IAppRoute[]): JSX.Element[] {
     if (!root) {
@@ -39,10 +38,6 @@ export class AppContent extends React.Component<IAppContentConnectProps> {
         />
       );
       routes.push(route);
-
-      if (item.routes && item.routes.length) {
-        routes.push(...this.getRoutes(item.routes));
-      }
     }
     return routes;
   }
@@ -59,6 +54,8 @@ export class AppContent extends React.Component<IAppContentConnectProps> {
           <Grid.Row>
             <Grid.Column>
               {this.getRoutes()}
+              <Route exact path={'/create-subject'} component={AddSubject}/>
+              <Route exact path={SUBJECT} component={Subject}/>
             </Grid.Column>
           </Grid.Row>
         </Grid>

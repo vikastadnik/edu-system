@@ -33,4 +33,11 @@ export class GroupApi {
       data: options
     });
   }
+
+  public static async deleteGroup(uuid: string): Promise<AxiosResponse> {
+    return BaseAPI.request({
+      url: `${API_URL_CONFIG.group.getGroupsList}/${uuid}`,
+      method: 'DELETE',
+    });
+  }
 }

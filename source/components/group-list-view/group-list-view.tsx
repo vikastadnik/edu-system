@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactTable, { Column, RowInfo } from 'react-table';
-import { Grid, Header } from 'semantic-ui-react';
+import { Button, Container, Header } from 'semantic-ui-react';
 import { autobind } from 'core-decorators';
 import { DEFAULT_PAGE_SIZE, GROUP_TEXT, TABLE_SELECTION_BACKGROUND_COLOR } from '../../constants';
 import { IGroupDTO } from '../../interfaces';
@@ -10,6 +10,7 @@ import { AddEditGroupModalContainer } from '../../containers/add-edit-group-moda
 
 export class GroupListView extends React.Component<IProps, IState> {
   constructor(props: IProps) {
+
     super(props);
     this.state = {
       selectedID: null,
@@ -32,6 +33,27 @@ export class GroupListView extends React.Component<IProps, IState> {
   }
 
   public getGroupsTable(): JSX.Element {
+    const COLUMNS: Column[] = [
+      { Header: 'Номер групи', accessor: 'name' },
+      { Header: 'Спеціальність', accessor: 'specialty.name', width: 150 },
+      { Header: 'Курс', accessor: 'course', width: 75 },
+      {
+        Header: '',
+        Cell: (row: any) => (
+          <div style={{ textAlign: 'center' }} className="table-buttons">
+            <Button.Group>
+              <Button icon="edit" primary> Редагувати </Button>
+              <Button
+                icon="remove"
+                onClick={() => this.props.onDeleteGroup(row.original)}
+              >
+                Видалити
+              </Button>
+            </Button.Group>
+          </div>
+        )
+      }
+    ];
     return (
       <ReactTable
         columns={COLUMNS}
@@ -46,36 +68,17 @@ export class GroupListView extends React.Component<IProps, IState> {
   }
 
   public render(): JSX.Element {
-    const errorHandler: JSX.Element = this.props.error ? <ErrorHandler error={this.props.error.message}/> : null;
     return (
-      <React.Fragment>
-        <Header size="large">{GROUP_TEXT.GROUPS_HEADER}</Header>
-        <Grid.Row columns="equal">
-          <Grid.Column>
-            {this.getGroupsTable()}
-            {errorHandler}
-          </Grid.Column>
-        </Grid.Row>
-
-        <Grid.Row columns="equal">
-          <Grid.Column>
-            <AddEditGroupModalContainer mode={'ADD'}/>
-          </Grid.Column>
-
-          <Grid.Column>
-            <AddEditGroupModalContainer mode={'EDIT'}/>
-          </Grid.Column>
-        </Grid.Row>
-      </React.Fragment>
+      <Container>
+        <Header size="large">{GROUP_TEXT.GROUPS_HEADER}
+          <AddEditGroupModalContainer mode={'ADD'}/>
+        </Header>
+        {this.getGroupsTable()}
+        <ErrorHandler error={this.props.error}/>
+      </Container>
     );
   }
 }
-
-const COLUMNS: Column[] = [
-  { Header: 'ID', accessor: 'id' },
-  { Header: 'Name', accessor: 'name' },
-  { Header: 'Faculty', accessor: 'faculty' },
-];
 
 export interface IProps {
   readonly loading: boolean;
@@ -83,9 +86,10 @@ export interface IProps {
   readonly error: AxiosError;
 
   onSelect(groupID: number): void;
+
+  onDeleteGroup(group: IGroupDTO): void;
 }
 
 export interface IState {
   readonly selectedID: number;
-
 }

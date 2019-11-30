@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as Redux from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { createLogger } from 'redux-logger';
@@ -11,7 +12,7 @@ export class App extends React.Component<{}, IAppState> {
   constructor(props: object) {
     super(props);
     this.state = {
-      store: Redux.createStore(Main, Redux.applyMiddleware(createLogger({ collapsed: true })))
+      store: Redux.createStore(Main, Redux.applyMiddleware(thunk, createLogger({ collapsed: true })))
     };
   }
 
@@ -19,7 +20,7 @@ export class App extends React.Component<{}, IAppState> {
     return (
       <Provider store={this.state.store}>
         <BrowserRouter>
-          <AppRootContainer />
+          <AppRootContainer/>
         </BrowserRouter>
       </Provider>
     );

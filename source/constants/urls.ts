@@ -7,6 +7,9 @@ export const API_URL_CONFIG: {
   },
   readonly student: {
     readonly  createStudent: string
+  },
+  readonly speciality: {
+    readonly getSpecialityList: string;
   }
 } = {
   auth: {
@@ -17,5 +20,8 @@ export const API_URL_CONFIG: {
   },
   student: {
     createStudent: '/students'
+  },
+  speciality: {
+    getSpecialityList: '/specialties'
   }
 };

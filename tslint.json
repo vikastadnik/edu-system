@@ -18,7 +18,7 @@
     ],
     "prefer-for-of": false,
     "typedef": [
-      true,
+      false,
       "call-signature",
       "parameter",
       "arrow-parameter",
@@ -36,7 +36,7 @@
         "variable-declaration": "nospace"
       }
     ],
-    "curly": true,
+    "curly": false,
     "no-bitwise": false,
     "no-empty": true,
     "no-eval": true,
@@ -52,10 +52,6 @@
       "spaces",
       2
     ],
-//    "linebreak-style": [
-//      true,
-//      "LF"
-//    ],
     "max-file-line-count": [
       true,
       1000
@@ -64,7 +60,7 @@
       true,
       120
     ],
-    "no-default-export": true,
+    "no-default-export": false,
     "trailing-comma": false,
     "align": [
       true,
@@ -85,7 +81,10 @@
       true,
       "always-prefix"
     ],
+    "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false,
     "jsdoc-format": true,
+    "no-submodule-imports": false,
     "new-parens": true,
     "no-consecutive-blank-lines": true,
     "no-trailing-whitespace": true,
@@ -130,7 +129,7 @@
       true,
       "never"
     ],
-    "jsx-use-translation-function": true,
+    "jsx-use-translation-function": false,
     "jsx-wrap-multiline": true
   }
 }

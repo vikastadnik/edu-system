@@ -29,12 +29,29 @@ export class GroupsList extends React.Component<IProps, IState> {
 
   @autobind
   public onSelect(selectedGroupID: number): void {
-    this.props.dispatch(Actions.Groups.setGroupAttribute({ selectedGroupID }));
+    // this.props.dispatch(Actions.Groups.setGroupAttribute({ selectedGroupID }));
+  }
+
+  @autobind
+  public async onDeleteGroup(group: IGroupDTO): Promise<void> {
+    try {
+      this.setState({ loading: true });
+      await GroupApi.deleteGroup(group.uuid);
+      this.props.dispatch(Actions.Groups.deleteGroup(group));
+      this.setState({ loading: false });
+    } catch (error) {
+      this.setState({ error, loading: false });
+    }
   }
 
   public render(): JSX.Element {
     return (
-      <GroupListView {...this.state} groupsList={this.props.groups} onSelect={this.onSelect}/>
+      <GroupListView
+        {...this.state}
+        groupsList={this.props.groups}
+        onSelect={this.onSelect}
+        onDeleteGroup={this.onDeleteGroup}
+      />
     );
   }
 }

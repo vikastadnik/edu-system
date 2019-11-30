@@ -48,16 +48,6 @@ export class AppHeader extends React.Component<IAppHeaderConnectProps> {
       }
     }
     const links: JSX.Element[] = root.map((route: IAppRoute, index: number): JSX.Element => {
-      if (route.routes) {
-        return (
-          <Dropdown key={index} item text={route.caption}>
-            <Dropdown.Menu>
-              {this.getNavLinks(route.routes, true)}
-            </Dropdown.Menu>
-          </Dropdown>
-        );
-      }
-
       /* Links without children are rendered as top-level links */
       const navLink: JSX.Element = (
         <NavLink key={route.path} to={route.path} exact>
@@ -65,9 +55,7 @@ export class AppHeader extends React.Component<IAppHeaderConnectProps> {
         </NavLink>
       );
 
-      return (nested)
-        ? <Dropdown.Item key={index} content={navLink}/>
-        : <Menu.Item key={index} content={navLink}/>;
+      return <Dropdown.Item key={index} content={navLink}/>;
     });
 
     return links;
