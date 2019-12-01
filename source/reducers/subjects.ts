@@ -43,7 +43,7 @@ export const subjects = handleActions({
   [ADD_SUCCESS]: (state, { payload }) => ({
     ...state,
     fetching: false,
-    listS: [...state.list, payload]
+    list: [...state.list, payload]
   }),
   [ADD_ERROR]: (state, { payload }) => ({
     ...state,

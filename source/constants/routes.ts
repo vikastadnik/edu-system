@@ -1,5 +1,5 @@
 import { IAppRoute } from '../interfaces';
-import { GroupsAndStudentList } from '../components/groups-and-student-list';
+import GroupsAndStudentList from '../components/groups-and-student-list';
 import Subject from '../components/subjects/subject/subject';
 import SubjectList from '../components/subjects/subject-list/subject-list';
 import TeachersList from '../components/teachers/teachers-list';

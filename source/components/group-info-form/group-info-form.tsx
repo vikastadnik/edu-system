@@ -45,35 +45,42 @@ export class GroupInfoForm extends React.Component<IProps> {
       <>
         <Form.Input
           label={GROUP_TEXT.NAME}
-          value={this.props.data.name || ''}
+          value={this.props?.data?.name || ''}
           onChange={this.onInputChange}
           name="name"
           type="text"
           required
         />
         <Form.Group widths="equal">
-          <Dropdown
-            placeholder={PLACEHOLDERS.SELECT_COURSE}
-            name="course"
-            label={GROUP_TEXT.COURSE}
-            search
-            selection
-            options={this.getCoursesOptions()}
-            onChange={this.onDropDownChange}
-            required
-            fluid
-          />
-          <Dropdown
-            placeholder={PLACEHOLDERS.SELECT_SPECIALITY}
-            label={GROUP_TEXT.COURSE}
-            name="specialtyUuid"
-            search
-            selection
-            options={this.getSpecialitiesOptions()}
-            required
-            fluid
-            onChange={this.onDropDownChange}
-          />
+          <Form.Field>
+            <label>Курс</label>
+            <Dropdown
+              placeholder={PLACEHOLDERS.SELECT_COURSE}
+              name="course"
+              label={GROUP_TEXT.COURSE}
+              search
+              selection
+              options={this.getCoursesOptions()}
+              onChange={this.onDropDownChange}
+              required
+              fluid
+            />
+          </Form.Field>
+
+          <Form.Field>
+            <label>Спеціальність</label>
+            <Dropdown
+              placeholder={PLACEHOLDERS.SELECT_SPECIALITY}
+              label={GROUP_TEXT.COURSE}
+              name="specialtyUuid"
+              search
+              selection
+              options={this.getSpecialitiesOptions()}
+              required
+              fluid
+              onChange={this.onDropDownChange}
+            />
+          </Form.Field>
         </Form.Group>
       </>
     );

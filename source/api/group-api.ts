@@ -2,7 +2,7 @@
  * Entry point for all group HTTP requests + auth functions
  */
 import { BaseAPI } from './base-api';
-import { IGroupDTO } from '../interfaces';
+import { IGroupDTO, IStudentDTO } from '../interfaces';
 import { API_URL_CONFIG } from '../constants/urls';
 import { AxiosResponse } from 'axios';
 
@@ -14,6 +14,15 @@ export class GroupApi {
     });
 
     return groupList.data as IGroupDTO[];
+  }
+
+  public static async getGroupStudentList(uuid: string): Promise<IStudentDTO[]> {
+    const response: AxiosResponse = await BaseAPI.request({
+      url: `/students/groups/${uuid}`,
+      method: 'GET'
+    });
+
+    return response.data as IStudentDTO[];
   }
 
   public static async createGroup(options: IGroupDTO): Promise<IGroupDTO> {

@@ -12,7 +12,7 @@ gulp.task('build', (callback) => {
     'build-get-info',
     'build-webpack'
   ];
-  return gulp.series(...tasks)(callback);
+  return sequence(...tasks, callback);
 });
 
 /** Start project as an application */
@@ -21,9 +21,12 @@ gulp.task('start', (callback) => {
     'build-clean',
     'build-copy-static-files',
     'build-tslint',
-    'build-get-info'
+    'build-get-info', [
+      'build-webpack-dev-server',
+      'build-watch'
+    ]
   ];
-  return gulp.series(...tasks, gulp.parallel(['build-webpack-dev-server', 'build-watch']))(callback);
+  return sequence(...tasks, callback);
 });
 
 /** Clean target folder */
@@ -75,6 +78,6 @@ gulp.task('build-webpack-dev-server', (callback) => {
 
 /** Watch static and src files */
 gulp.task('build-watch', () => {
-  gulp.watch(path.join(tasks.paths.source, '**', '*.?(ts|tsx)'), gulp.series(['build-tslint']));
-  gulp.watch(path.join(tasks.paths.static, '**', '*.*'), gulp.series(['build-copy-static-files']));
+  gulp.watch(path.join(tasks.paths.source, '**', '*.?(ts|tsx)'), ['build-tslint']);
+  gulp.watch(path.join(tasks.paths.static, '**', '*.*'), ['build-copy-static-files']);
 });

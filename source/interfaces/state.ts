@@ -1,4 +1,4 @@
-import { IGroupDTO, ISpecialityDTO, ISubjectDTO, IUser } from './index';
+import { IGroupDTO, ISpecialityDTO, IStudentDTO, ISubjectDTO, IUser } from './index';
 
 export interface IState {
   readonly auth: IAuthToken;
@@ -16,8 +16,11 @@ export interface IAuthToken {
 }
 
 export interface IGroups {
-  readonly groupsList: IGroupDTO[];
-  readonly selectedGroupID: string;
+  readonly list: IGroupDTO[];
+  readonly fetching: boolean;
+  readonly error: any;
+  readonly selectedUuid: string;
+  readonly studentList: IStudentDTO[];
 }
 
 export interface IStudent {

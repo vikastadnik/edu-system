@@ -21,6 +21,7 @@ export interface IGroupDTO {
 }
 
 export interface IStudentDTO {
+  availableLessons?: any[];
   uuid: string;
   email: string;
   group: string;
