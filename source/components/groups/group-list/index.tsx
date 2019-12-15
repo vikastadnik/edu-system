@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactTable, { Column, RowInfo } from 'react-table';
-import { Container, Header } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 import { DEFAULT_PAGE_SIZE, GROUP_TEXT, TABLE_SELECTION_BACKGROUND_COLOR } from '../../../constants';
 import { IGroupDTO, IState } from '../../../interfaces';
 import { AxiosError } from 'axios';
@@ -35,7 +35,7 @@ class GroupList extends React.Component<IProps> {
 
   public render(): JSX.Element {
     return (
-      <Container>
+      <>
         <Header size="large">{GROUP_TEXT.GROUPS_HEADER}
           <AddEditGroupModal/>
         </Header>
@@ -49,7 +49,7 @@ class GroupList extends React.Component<IProps> {
           resizable={false}
           getTrProps={this.getTrProps}
         />
-      </Container>
+      </>
     );
   }
 }
@@ -83,7 +83,7 @@ export interface IProps {
 }
 
 const COLUMNS: Column[] = [
-  { Header: 'Номер групи', accessor: 'name' },
-  { Header: 'Спеціальність', accessor: 'specialty.name', width: 150 },
+  { Header: 'Номер групи', accessor: 'name', width: 150 },
+  { Header: 'Спеціальність', accessor: 'specialty.name' },
   { Header: 'Курс', accessor: 'course', width: 75 },
 ];

@@ -39,8 +39,9 @@ export interface ISubjectDTO {
   readonly uuid?: string;
   readonly name: string;
   readonly description: string;
-  readonly imgURL: string;
+  readonly imgUrl: string;
   readonly teacherUuid?: string;
+  readonly cards?: ICardDTO[];
 }
 
 export interface IUser {
@@ -55,4 +56,17 @@ export interface IUser {
 export interface ITeacher {
   user: IUser;
   uuid?: string;
+}
+
+export interface ICardDTO {
+  readonly [key: string]: any;
+  uuid?: string;
+  readonly title: string;
+  readonly type: 'TEST' | 'INFO' | null;
+  readonly content: string;
+  readonly firstPage: boolean;
+  readonly parentUuid?: string;
+  readonly parentType?: 'TEST' | 'INFO' | null;
+  readonly nextUuid?: string;
+  readonly nextType?: string;
 }

@@ -3,12 +3,20 @@ import { AppHeaderContainer } from '../app-header';
 import { IAppRoute } from '../../interfaces';
 import { IAppContentConnectProps } from './app-content-container';
 import { USER_ROLES } from '../../enums';
-import { ADMIN_APP_ROUTES, SUBJECT, TEACHER_APP_ROUTES } from '../../constants';
+import {
+  ADD_INFO_CARD,
+  ADMIN_APP_ROUTES,
+  LOOK_INFO_CARD,
+  SUBJECT,
+  TEACHER_APP_ROUTES
+} from '../../constants';
 import Subject from '../../components/subjects/subject/subject';
 import { Route } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 import './app-content.less';
 import AddSubject from '../../components/subjects/add-subject-modal';
+import AddInfoCard from '../../components/subjects/add-info-card';
+import InfoCard from '../../components/subjects/info-card';
 
 export class AppContent extends React.Component<IAppContentConnectProps> {
 
@@ -44,7 +52,7 @@ export class AppContent extends React.Component<IAppContentConnectProps> {
 
   public render(): JSX.Element {
     return (
-      <React.Fragment>
+      <>
         <AppHeaderContainer
           history={this.props.history}
           location={this.props.location}
@@ -56,10 +64,12 @@ export class AppContent extends React.Component<IAppContentConnectProps> {
               {this.getRoutes()}
               <Route exact path={'/create-subject'} component={AddSubject}/>
               <Route exact path={SUBJECT} component={Subject}/>
+              <Route exact path={ADD_INFO_CARD} component={AddInfoCard}/>
+              <Route exact path={LOOK_INFO_CARD} component={InfoCard}/>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </React.Fragment>
+      </>
     );
   }
 }

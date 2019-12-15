@@ -5,8 +5,9 @@ import { groups } from './groups';
 import { specialities } from './specialities';
 import { teachers } from './teachers';
 import { subjects } from './subjects';
+import { students } from './students';
 
 // @ts-ignore
 export const Main: Redux.Reducer<IState> = Redux.combineReducers({
-  auth, groups, specialities, teachers, subjects
+  auth, groups, specialities, teachers, subjects, students
 });

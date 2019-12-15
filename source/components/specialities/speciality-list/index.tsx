@@ -34,8 +34,7 @@ class SpecialitiesList extends React.Component<IConnectedProps> {
       Header: '',
       Cell: (row: any) => (
         <div style={{ textAlign: 'right' }}>
-          {/* tslint:disable-next-line:jsx-no-lambda */}
-          <Button circular icon="delete" onClick={() => null}/>
+          <Button onClick={() => null} content="Видалити"/>
         </div>
       )
     }
@@ -83,7 +82,6 @@ interface IConnectedProps {
 
   deleteSpeciality(uuid: string): void;
 }
-
 
 export interface IProps {
   readonly specialityList: ISpecialityDTO[];

@@ -13,7 +13,7 @@ export const fetchGroupStudentList = () => (dispatch, getState) => {
   if (!uuid) return null;
   dispatch(a.groupsFetchStart());
   return GroupApi.getGroupStudentList(uuid)
-    .then((resp) => dispatch(a.groupStudentFetchSuccess(resp)))
+    .then((resp) => dispatch(a.groupsFetchStudentSuccess(resp)))
     .catch((err) => dispatch(a.groupsFetchError(err)));
 };
 

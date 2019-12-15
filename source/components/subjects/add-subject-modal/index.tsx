@@ -12,7 +12,7 @@ class AddSubject extends Component<IConnectedProps, IStateShape> {
   constructor(props: IConnectedProps) {
     super(props);
     this.state = {
-      name: '', description: '', imgURL: '', teacherUuid: ''
+      name: '', description: '', imgUrl: '', teacherUuid: ''
     };
   }
 
@@ -39,12 +39,12 @@ class AddSubject extends Component<IConnectedProps, IStateShape> {
   }
 
   public onSubmitForm = async () => {
-    const { name, description, imgURL, teacherUuid } = this.state;
-    this.props.addSubject({ name, description, imgURL, teacherUuid });
+    const { name, description, imgUrl, teacherUuid } = this.state;
+    this.props.addSubject({ name, description, imgUrl, teacherUuid });
   }
 
   public getFormComponent = () => {
-    const { name, description, imgURL } = this.state;
+    const { name, description, imgUrl } = this.state;
     return (
       <>
         <Form.Input
@@ -56,8 +56,8 @@ class AddSubject extends Component<IConnectedProps, IStateShape> {
 
         <Form.Input
           label={'Посилання на прев\'ю зображення'}
-          value={imgURL}
-          name="imgURL"
+          value={imgUrl}
+          name="imgUrl"
           onChange={this.onInputChange}
         />
         <Form.Field>
@@ -110,7 +110,7 @@ interface IStateShape {
 
   readonly name?: string;
   readonly description?: string;
-  readonly imgURL?: string;
+  readonly imgUrl?: string;
 }
 
 interface IConnectedProps {

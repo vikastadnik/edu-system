@@ -12,6 +12,9 @@ export const DELETE_START = 'subjects@DELETE_START';
 export const DELETE_SUCCESS = 'subjects@DELETE_SUCCESS';
 export const DELETE_ERROR = 'subjects@DELETE_ERROR';
 
+export const SET_CURRENT_SUBJECT = 'subjects@SET_CURRENT_SUBJECT';
+export const ADD_CARD_TO_CURRENT_SUBJECT = 'subjects@ADD_CARD_TO_CURRENT_SUBJECT';
+
 export const {
   subjectsFetchStart,
   subjectsFetchSuccess,
@@ -21,18 +24,16 @@ export const {
   subjectsAddSuccess,
   subjectsAddError,
 
-  subjectsDeleteStart,
-  subjectsDeleteSuccess,
-  subjectsDeleteError
-
-} = createActions(
+  subjectsSetCurrentSubject,
+  subjectsAddCardToCurrentSubject
+}
+  = createActions(
   FETCH_START,
   FETCH_SUCCESS,
   FETCH_ERROR,
   ADD_START,
   ADD_SUCCESS,
   ADD_ERROR,
-  DELETE_ERROR,
-  DELETE_START,
-  DELETE_SUCCESS
+  SET_CURRENT_SUBJECT,
+  ADD_CARD_TO_CURRENT_SUBJECT
 );

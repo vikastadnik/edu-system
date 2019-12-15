@@ -4,11 +4,13 @@ import Subject from '../components/subjects/subject/subject';
 import SubjectList from '../components/subjects/subject-list/subject-list';
 import TeachersList from '../components/teachers/teachers-list';
 import SpecialitiesList from '../components/specialities/speciality-list';
+import StudentList from '../components/students/students-list';
 
 export const ADMIN_APP_ROUTES: IAppRoute[] = [
   {
-    caption: 'Student Management',
+    caption: 'Студенти',
     path: '/student-management',
+    component: StudentList,
     exact: true
   },
   {
@@ -45,6 +47,12 @@ export const ADMIN_APP_ROUTES: IAppRoute[] = [
 ];
 
 export const SUBJECT: string = '/subjects/:subjectId';
+
+export const ADD_INFO_CARD: string = '/subjects/:subjectId/add-info-card';
+
+export const LOOK_INFO_CARD: string = '/subjects/:subjectId/info-card/:cardId';
+export const LOOK_TEST_CARD: string = '/subjects/:subjectId/test-card/:cardId';
+
 export const TEACHER_APP_ROUTES: IAppRoute[] = [
   {
     caption: 'Group Management',

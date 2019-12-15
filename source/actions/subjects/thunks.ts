@@ -24,3 +24,17 @@ export const addSubject = (data) => (dispatch) => {
 //     dispatch(a.subjectsDeleteError(err));
 //   }
 // };
+
+export const setCurrentSubject = (data) => (dispatch) => {
+  dispatch(a.subjectsFetchError());
+  return SubjectApi.getSubjectByID(data)
+    .then((resp) => dispatch(a.subjectsSetCurrentSubject(resp)))
+    .catch((err) => dispatch(a.subjectsFetchError(err)));
+};
+
+export const addCardToSubject = (data) => (dispatch) => {
+  dispatch(a.subjectsAddStart());
+  return SubjectApi.createInfoCard(data)
+    .then((resp) => dispatch(a.subjectsAddCardToCurrentSubject(resp)))
+    .catch((err) => dispatch(a.subjectsFetchError(err)));
+};

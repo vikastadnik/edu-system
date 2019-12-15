@@ -6,6 +6,7 @@ export interface IState {
   readonly specialities: ISpecialities;
   readonly teachers: ITeachers;
   readonly subjects: ISubjects;
+  readonly students: IStudents;
 }
 
 export interface IAuthToken {
@@ -23,9 +24,10 @@ export interface IGroups {
   readonly studentList: IStudentDTO[];
 }
 
-export interface IStudent {
-  readonly id: string;
-  readonly data: object;
+export interface IStudents {
+  readonly list: IStudentDTO[];
+  readonly fetching: boolean;
+  readonly error: any;
 }
 
 export interface ITeachers {
@@ -38,6 +40,7 @@ export interface ISubjects {
   readonly list: ISubjectDTO[];
   readonly fetching: boolean;
   readonly error: any;
+  readonly currentSubject: ISubjectDTO;
 }
 
 export interface ISpecialities {

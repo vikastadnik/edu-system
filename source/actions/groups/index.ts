@@ -30,7 +30,7 @@ export const {
   groupsDeleteError,
 
   groupsSelect,
-  groupStudentFetchSuccess
+  groupsFetchStudentSuccess
 
 } = createActions(
   FETCH_START,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button,  Grid } from 'semantic-ui-react';
+import { Button, Grid } from 'semantic-ui-react';
 import GroupList from '../../components/groups/group-list';
 import { ErrorHandler } from '../error-handler';
 import { compose } from 'redux';
@@ -8,6 +8,7 @@ import { IGroupDTO, IState } from '../../interfaces';
 import { getSelectedGroup } from '../../selectors/groups';
 import * as groupsThunks from '../../actions/groups/thunks';
 import { noop } from 'lodash-es';
+import StudentList from '../students/students-list';
 
 class GroupsAndStudentList extends React.Component<IProps> {
 
@@ -18,7 +19,10 @@ class GroupsAndStudentList extends React.Component<IProps> {
           <Grid.Column>
             <GroupList/>
           </Grid.Column>
-          <Grid.Column/>
+
+          <Grid.Column>
+            <StudentList/>
+          </Grid.Column>
         </Grid.Row>
 
         <Grid.Row columns="equal">

@@ -73,6 +73,8 @@ export const groups = handleActions({
   }),
   [FETCH_STUDENT_SUCCESS]: (state, { payload }) => ({
     ...state,
+    fetching: false,
+    error: false,
     studentList: payload || []
   })
 }, initialState);

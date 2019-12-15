@@ -10,13 +10,14 @@ import {
   ADD_START,
   DELETE_SUCCESS,
   DELETE_START,
-  DELETE_ERROR
+  DELETE_ERROR, SET_CURRENT_SUBJECT, ADD_CARD_TO_CURRENT_SUBJECT,
 } from '../actions/subjects';
 
 export const initialState: ISubjects = {
   list: [],
   fetching: false,
-  error: null
+  error: null,
+  currentSubject: null
 };
 
 export const subjects = handleActions({
@@ -64,5 +65,23 @@ export const subjects = handleActions({
     ...state,
     fetching: false,
     error: payload,
+  }),
+  [SET_CURRENT_SUBJECT]: (state, { payload }) => ({
+    ...state,
+    fetching: false,
+    error: null,
+    currentSubject: payload
+  }),
+  [ADD_CARD_TO_CURRENT_SUBJECT]: (state, { payload }) => ({
+    ...state,
+    fetching: false,
+    error: null,
+    currentSubject: {
+      ...state.currentSubject,
+      cards: [
+        ...state.currentSubject.cards,
+        payload
+      ]
+    }
   })
 }, initialState);

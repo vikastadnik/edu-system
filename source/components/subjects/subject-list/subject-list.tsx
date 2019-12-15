@@ -17,14 +17,16 @@ class SubjectList extends Component<IConnectedProps> {
   }
 
   public getSubjectItem = (subject: ISubjectDTO) => {
+    const { description: d, imgUrl, name, uuid } = subject;
+    const description: string = d.length > 100 ? `${d.substr(0, 100)}...` : d;
     return (
-      <Link to={`/subjects/${subject.uuid}`}>
-        <Item.Group>
+      <Link to={`/subjects/${uuid}`}>
+        <Item.Group  style={{marginTop: 20}}>
           <Item>
-            <Item.Image src={subject.imgURL}/>
+            <Item.Image src={imgUrl}/>
             <Item.Content>
-              <Item.Header as="a">{subject.name}</Item.Header>
-              <Item.Description dangerouslySetInnerHTML={{ __html: subject.description }}/>
+              <Item.Header as="a">{name}</Item.Header>
+              <Item.Description dangerouslySetInnerHTML={{ __html: description }}/>
               <Item.Extra>
                 <Button primary floated="right">
                   Детальніше

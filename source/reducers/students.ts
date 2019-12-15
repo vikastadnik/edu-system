@@ -11,7 +11,7 @@ import {
   DELETE_SUCCESS,
   DELETE_START,
   DELETE_ERROR
-} from '../actions/specialities';
+} from '../actions/students';
 
 export const initialState: ISpecialities = {
   list: [],
@@ -19,7 +19,7 @@ export const initialState: ISpecialities = {
   error: null
 };
 
-export const specialities = handleActions({
+export const students = handleActions({
   [FETCH_START]: (state) => ({
     ...state,
     error: null,
