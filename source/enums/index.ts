@@ -13,7 +13,17 @@ export enum CARD_TYPES {
   TEST = 'TEST'
 }
 
+export enum TEST_TYPES {
+  FORMULA = 'FORMULA',
+  QUESTION = 'QUESTION'
+}
+
 export enum CARD_TYPES_TITLES {
   INFO = 'Інформаційний кадр',
   TEST = 'Тестовий кадр'
+}
+
+export enum TEST_TYPES_TITLES {
+  FORMULA = 'Формула',
+  QUESTION = 'Відкрите питання'
 }

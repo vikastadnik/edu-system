@@ -1,4 +1,4 @@
-import { IGroupDTO, ISpecialityDTO, IStudentDTO, ISubjectDTO, IUser } from './index';
+import { ICardDTO, IGroupDTO, ISpecialityDTO, IStudentDTO, ISubjectDTO, IUser } from './index';
 
 export interface IState {
   readonly auth: IAuthToken;
@@ -41,6 +41,7 @@ export interface ISubjects {
   readonly fetching: boolean;
   readonly error: any;
   readonly currentSubject: ISubjectDTO;
+  readonly currentCard: ICardDTO;
 }
 
 export interface ISpecialities {

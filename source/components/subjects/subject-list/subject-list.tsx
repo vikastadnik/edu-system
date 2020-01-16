@@ -21,12 +21,18 @@ class SubjectList extends Component<IConnectedProps> {
     const description: string = d.length > 100 ? `${d.substr(0, 100)}...` : d;
     return (
       <Link to={`/subjects/${uuid}`}>
-        <Item.Group  style={{marginTop: 20}}>
+        <Item.Group style={{ marginTop: 20 }}>
           <Item>
             <Item.Image src={imgUrl}/>
             <Item.Content>
               <Item.Header as="a">{name}</Item.Header>
-              <Item.Description dangerouslySetInnerHTML={{ __html: description }}/>
+              <Item.Description
+                dangerouslySetInnerHTML={{
+                  __html: description.length > 150
+                    ? `${description.substr(0, 150)}...`
+                    : description
+                }}
+              />
               <Item.Extra>
                 <Button primary floated="right">
                   Детальніше

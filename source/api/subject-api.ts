@@ -1,4 +1,4 @@
-import { ICardDTO, ISubjectDTO } from '../interfaces';
+import { ICardDTO, ISubjectDTO, ITaskDTO } from '../interfaces';
 import { BaseAPI } from './base-api';
 import { AxiosResponse } from 'axios';
 
@@ -47,9 +47,37 @@ export class SubjectApi {
     return response.data as ICardDTO;
   }
 
+  public static async creatTestCard(data): Promise<ICardDTO> {
+    const response: AxiosResponse = await BaseAPI.request({
+      url: `/cards/test`,
+      method: 'post',
+      data
+    });
+
+    return response.data as ICardDTO;
+  }
+
+  public static async createTask(data): Promise<ITaskDTO> {
+    const response: AxiosResponse = await BaseAPI.request({
+      url: `/tasks`,
+      method: 'post',
+      data
+    });
+    return response.data as ITaskDTO;
+  }
+
   public static async getInfoCard(uuid): Promise<ICardDTO> {
     const response: AxiosResponse = await BaseAPI.request({
       url: `/cards/info/${uuid}`,
+      method: 'get',
+    });
+
+    return response.data as ICardDTO;
+  }
+
+  public static async getTestCard(uuid): Promise<ICardDTO> {
+    const response: AxiosResponse = await BaseAPI.request({
+      url: `/cards/test/${uuid}`,
       method: 'get',
     });
 

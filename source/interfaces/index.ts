@@ -60,6 +60,7 @@ export interface ITeacher {
 
 export interface ICardDTO {
   readonly [key: string]: any;
+
   uuid?: string;
   readonly title: string;
   readonly type: 'TEST' | 'INFO' | null;
@@ -69,4 +70,16 @@ export interface ICardDTO {
   readonly parentType?: 'TEST' | 'INFO' | null;
   readonly nextUuid?: string;
   readonly nextType?: string;
+
+  readonly tasks?: ITaskDTO[];
+}
+
+export interface ITaskDTO {
+  readonly [key: string]: any;
+
+  answer: string;
+  content: string;
+  params: string;
+  taskType: any;
+  uuid?: string;
 }

@@ -6,6 +6,7 @@ import { Button, Container, Grid, Header, Loader } from 'semantic-ui-react';
 import { ICardDTO, IState as IStore, ISubjectDTO } from '../../../interfaces';
 import { RouteConfigComponentProps } from 'react-router-config';
 import { setCurrentSubject } from '../../../actions/subjects/thunks';
+import { CARD_TYPES } from '../../../enums';
 
 class InfoCard extends Component<IProps, IState> {
 
@@ -60,7 +61,11 @@ class InfoCard extends Component<IProps, IState> {
 
               {card.nextType && card.nextUuid &&
               <Link to={`/subjects/${subjectId}/${card.nextType?.toLowerCase()}-card/${card.nextUuid}`}>
-                <Button content="Наступний урок" icon="right arrow" labelPosition="right"/>
+                <Button
+                  content={card.nextType === CARD_TYPES.INFO ? 'Наступний урок' : 'Перейти до тесту'}
+                  icon="right arrow"
+                  labelPosition="right"
+                />
               </Link>}
             </Grid.Column>
           </Grid.Row>

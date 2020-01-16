@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Button, Container,
+  Button, Checkbox, Container,
   DropdownItemProps,
   Form,
   Grid,
@@ -63,6 +63,8 @@ class AddInfoCard extends Component<IProps, IState> {
 
   public onRadioChange = (e, { value }) => this.setState({ type: value });
 
+  public onCheckBoxChange = (e, { value }) => this.setState({ firstPage: value });
+
   public onChangeParentLesson = (e: object, change: InputOnChangeData) => {
     const parentLesson = this.props.currentSubject.cards.find((l) => l.uuid === change.value);
     this.setState({ parentUuid: parentLesson.uuid, parentType: parentLesson.type });
@@ -76,10 +78,10 @@ class AddInfoCard extends Component<IProps, IState> {
   }
 
   public onSubmitForm = async () => {
-    const { title, content, firstPage, parentUuid, parentType } = this.state;
+    const { title, content, firstPage, parentUuid, parentType, type } = this.state;
 
     this.props.addCardToSubject({
-      title,
+      title, type,
       content, firstPage,
       parentType, parentUuid,
       lessonUuid: this.props.currentSubject.uuid
@@ -87,7 +89,7 @@ class AddInfoCard extends Component<IProps, IState> {
   }
 
   public render(): JSX.Element {
-    const { title, content, type, success } = this.state;
+    const { title, content, type, success, firstPage } = this.state;
     const { fetching, currentSubject, error } = this.props;
     if (fetching || !currentSubject) {
       return <Loader/>;
@@ -128,6 +130,15 @@ class AddInfoCard extends Component<IProps, IState> {
               />
 
             </Form.Field>
+
+            {type === CARD_TYPES.INFO && (<Form.Field>
+              <Checkbox
+                label="Даний блок знань є першим"
+                checked={firstPage}
+                name="firstPage"
+                onChange={this.onCheckBoxChange}
+              />
+            </Form.Field>)}
 
             <Form.Field>
               <label>Попередній блок знань</label>

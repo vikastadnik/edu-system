@@ -1,5 +1,6 @@
 import * as a from '.';
 import { SubjectApi } from '../../api/subject-api';
+import { CARD_TYPES } from '../../enums';
 
 export const fetchSubjects = () => (dispatch) => {
   dispatch(a.subjectsFetchStart());
@@ -26,7 +27,7 @@ export const addSubject = (data) => (dispatch) => {
 // };
 
 export const setCurrentSubject = (data) => (dispatch) => {
-  dispatch(a.subjectsFetchError());
+  dispatch(a.subjectsFetchStart());
   return SubjectApi.getSubjectByID(data)
     .then((resp) => dispatch(a.subjectsSetCurrentSubject(resp)))
     .catch((err) => dispatch(a.subjectsFetchError(err)));
@@ -34,7 +35,23 @@ export const setCurrentSubject = (data) => (dispatch) => {
 
 export const addCardToSubject = (data) => (dispatch) => {
   dispatch(a.subjectsAddStart());
-  return SubjectApi.createInfoCard(data)
-    .then((resp) => dispatch(a.subjectsAddCardToCurrentSubject(resp)))
+  return data.type === CARD_TYPES.INFO
+    ? SubjectApi.createInfoCard(data)
+    : SubjectApi.creatTestCard(data)
+      .then((resp) => dispatch(a.subjectsAddCardToCurrentSubject(resp)))
+      .catch((err) => dispatch(a.subjectsFetchError(err)));
+};
+
+export const addTaskToSubject = (data) => (dispatch) => {
+  dispatch(a.subjectsAddStart());
+  return SubjectApi.createTask(data)
+      .then((resp) => dispatch(a.subjectsAddTask(resp)))
+      .catch((err) => dispatch(a.subjectsFetchError(err)));
+};
+
+export const setCurrentTestCard = (data) => (dispatch) => {
+  dispatch(a.subjectsFetchStart());
+  return SubjectApi.getTestCard(data)
+    .then((resp) => dispatch(a.subjectsSetCurrentCard(resp)))
     .catch((err) => dispatch(a.subjectsFetchError(err)));
 };

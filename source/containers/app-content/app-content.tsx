@@ -6,7 +6,7 @@ import { USER_ROLES } from '../../enums';
 import {
   ADD_INFO_CARD,
   ADMIN_APP_ROUTES,
-  LOOK_INFO_CARD,
+  LOOK_INFO_CARD, LOOK_TEST_CARD,
   SUBJECT,
   TEACHER_APP_ROUTES
 } from '../../constants';
@@ -17,6 +17,7 @@ import './app-content.less';
 import AddSubject from '../../components/subjects/add-subject-modal';
 import AddInfoCard from '../../components/subjects/add-info-card';
 import InfoCard from '../../components/subjects/info-card';
+import TestCard from '../../components/subjects/test-card';
 
 export class AppContent extends React.Component<IAppContentConnectProps> {
 
@@ -66,6 +67,7 @@ export class AppContent extends React.Component<IAppContentConnectProps> {
               <Route exact path={SUBJECT} component={Subject}/>
               <Route exact path={ADD_INFO_CARD} component={AddInfoCard}/>
               <Route exact path={LOOK_INFO_CARD} component={InfoCard}/>
+              <Route exact path={LOOK_TEST_CARD} component={TestCard}/>
             </Grid.Column>
           </Grid.Row>
         </Grid>

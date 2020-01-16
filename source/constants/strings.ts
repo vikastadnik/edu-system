@@ -1,5 +1,5 @@
 export enum COMMON_VIEW_TEXT {
-  TITLE = 'Електронна система деканату',
+  TITLE = 'Навчальна система',
   SEARCH = 'Пошук',
   RESET = 'Reset',
   SAVE = 'Зберегти',

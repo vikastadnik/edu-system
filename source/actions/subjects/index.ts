@@ -14,6 +14,9 @@ export const DELETE_ERROR = 'subjects@DELETE_ERROR';
 
 export const SET_CURRENT_SUBJECT = 'subjects@SET_CURRENT_SUBJECT';
 export const ADD_CARD_TO_CURRENT_SUBJECT = 'subjects@ADD_CARD_TO_CURRENT_SUBJECT';
+export const ADD_TEST_TO_CURRENT_SUBJECT = 'subjects@ADD_CARD_TO_CURRENT_SUBJECT';
+export const SET_CURRENT_CARD = 'subjects@SET_CURRENT_CARD';
+export const ADD_TASK = 'subjects@ADD_TASK';
 
 export const {
   subjectsFetchStart,
@@ -25,7 +28,9 @@ export const {
   subjectsAddError,
 
   subjectsSetCurrentSubject,
-  subjectsAddCardToCurrentSubject
+  subjectsAddCardToCurrentSubject,
+  subjectsSetCurrentCard,
+  subjectsAddTask,
 }
   = createActions(
   FETCH_START,
@@ -35,5 +40,7 @@ export const {
   ADD_SUCCESS,
   ADD_ERROR,
   SET_CURRENT_SUBJECT,
-  ADD_CARD_TO_CURRENT_SUBJECT
+  ADD_CARD_TO_CURRENT_SUBJECT,
+  SET_CURRENT_CARD,
+  ADD_TASK
 );
